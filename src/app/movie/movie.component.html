@@ -1,0 +1,80 @@
+
+<div class="container">
+  <ul class="nav nav-pills">
+    <li class="nav-item mb-5">
+      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addModal">New</button>
+    </li>
+  </ul>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Director</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let movie of movies">
+            <th scope="row">{{movie.id}}</th>
+            <td>{{movie.name}}</td>
+            <td>{{movie.catergory}}</td>
+            <td>{{movie.rating}}</td>
+            <td>{{movie.director.name}}</td>
+            <td>
+              <button type="button" class="btn btn-primary" (click)="updateMovie(movie)">Edit</button>
+              <button type="button" class="btn btn-danger ms-1" (click)="deleteMovie(movie)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="!movies.length" class="alert alert-warning" role="alert">
+        No movies were found 🙁
+      </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Movie</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+        <form class="row g-3" [formGroup]="movieForm">
+          <div class="col-md-6">
+            <label for="Id" class="form-label">Id</label>
+            <input type="text" class="form-control" id="Id" formControlName="id">
+          </div>
+          <div class="col-md-6">
+            <label for="Name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="Name" formControlName="name">
+          </div>
+          <div class="col-9">
+            <label for="Catergory" class="form-label">Catergory</label>
+            <input type="text" class="form-control" id="Catergory" placeholder="Horror" formControlName="catergory">
+          </div>
+          <div class="col-3">
+            <label for="Rating" class="form-label">Rating</label>
+            <input type="text" class="form-control" id="Rating" placeholder="10" formControlName="rating">
+          </div>
+          <div class="col-md-12">
+            <select class="form-select mb-3" aria-label="" formControlName="director">
+              <option *ngFor="let director of directors" [ngValue]="director" >{{director.name}}</option>
+            </select>
+          </div>
+          
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button id="close-modal-button" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="addMovie()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
