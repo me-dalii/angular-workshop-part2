@@ -19,7 +19,6 @@ export class MovieDetailsComponent implements OnInit {
 
     //if id use
     //this.pathId = parseInt(this.route.snapshot.paramMap.get('id'));
-
   }
 
 

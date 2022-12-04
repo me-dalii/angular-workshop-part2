@@ -18,11 +18,11 @@
         </thead>
         <tbody>
           <tr *ngFor="let movie of movies">
-            <th scope="row">{{movie.id}}</th>
-            <td>{{movie.name}}</td>
-            <td>{{movie.catergory}}</td>
-            <td>{{movie.rating}}</td>
-            <td>{{movie.director.name}}</td>
+            <th scope="row">{{movie?.id}}</th>
+            <td>{{movie?.name}}</td>
+            <td>{{movie?.category}}</td>
+            <td>{{movie?.rating}}</td>
+            <td>{{movie?.director.name}}</td>
             <td>
               <button type="button" class="btn btn-primary" (click)="updateMovie(movie)">Edit</button>
               <button type="button" class="btn btn-danger ms-1" (click)="deleteMovie(movie)">Delete</button>
@@ -30,7 +30,7 @@
           </tr>
         </tbody>
       </table>
-      <div *ngIf="!movies.length" class="alert alert-warning" role="alert">
+      <div *ngIf="!movies?.length" class="alert alert-warning" role="alert">
         No movies were found 🙁
       </div>
 </div>
@@ -47,17 +47,17 @@
       <div class="modal-body">
         
         <form class="row g-3" [formGroup]="movieForm">
-          <div class="col-md-6">
+          <!-- <div class="col-md-6">
             <label for="Id" class="form-label">Id</label>
             <input type="text" class="form-control" id="Id" formControlName="id">
-          </div>
-          <div class="col-md-6">
+          </div> -->
+          <div class="col-md-12">
             <label for="Name" class="form-label">Name</label>
             <input type="text" class="form-control" id="Name" formControlName="name">
           </div>
           <div class="col-9">
-            <label for="Catergory" class="form-label">Catergory</label>
-            <input type="text" class="form-control" id="Catergory" placeholder="Horror" formControlName="catergory">
+            <label for="Catergory" class="form-label">Category</label>
+            <input type="text" class="form-control" id="Category" placeholder="Horror" formControlName="category">
           </div>
           <div class="col-3">
             <label for="Rating" class="form-label">Rating</label>
@@ -73,7 +73,7 @@
       </div>
       <div class="modal-footer">
         <button id="close-modal-button" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="addMovie()">Save</button>
+        <button type="button" class="btn btn-primary" (click)="addMovie()" [disabled]="!movieForm.valid">Save</button>
       </div>
     </div>
   </div>
